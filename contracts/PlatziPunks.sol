@@ -6,9 +6,12 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/finance/PaymentSplitter.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/utils/Base64.sol";
 
 contract PlatziPunks is ERC721, ERC721Enumerable, Ownable, PaymentSplitter {
   using Counters for Counters.Counter;
+  using Strings for uint256;
 
   Counters.Counter private _tokenIdCounter;
   uint256 public maxSupply;
@@ -30,6 +33,27 @@ contract PlatziPunks is ERC721, ERC721Enumerable, Ownable, PaymentSplitter {
       // increment the tokenId counter
       _tokenIdCounter.increment();
   }
+
+      function tokenURI(uint256 _tokenId)
+        public
+        pure
+        override
+        returns (string memory)
+    {
+        bytes memory jsonURI = abi.encodePacked(
+          '{ "name": "PlatziPunks #', _tokenId.toString(), '"',
+          '"description": "Platzi Punks are randomized Avataaars stored on chain to teach DApp development on Platzi",',
+          '"image": "', '"// TODO: calculate image url"',
+          '"}'
+        );
+
+        return string(
+            abi.encodePacked(
+                "data:application/json;base64,",
+                Base64.encode(jsonURI)
+            )
+        );
+    }
 
   // The following functions are overrides required by Solidity.
   function _beforeTokenTransfer(address from, address to, uint256 tokenId)
