@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -8,8 +8,9 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/finance/PaymentSplitter.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/utils/Base64.sol";
+import "./PlatziPunksDNA.sol";
 
-contract PlatziPunks is ERC721, ERC721Enumerable, Ownable, PaymentSplitter {
+contract PlatziPunks is ERC721, ERC721Enumerable, Ownable, PaymentSplitter, PlatziPunksDNA {
   using Counters for Counters.Counter;
   using Strings for uint256;
 
