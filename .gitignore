@@ -132,3 +132,5 @@ dist
 #Hardhat files
 cache
 artifacts
+
+arguments.js
